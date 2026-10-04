@@ -216,3 +216,6 @@ Made by Jake Schincariol, [opusjake.ai](https://opusjake.ai). Siblings:
 ## License
 
 MIT. Take it, change it, ship it.
+
+Contributions welcome. The house rules are in
+[CONTRIBUTING.md](CONTRIBUTING.md).

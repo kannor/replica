@@ -10,6 +10,8 @@ SKILLS = ["replica-recon", "replica-architect", "replica-design", "replica-build
           "replica-brand", "replica-launch", "replica-deploy"]
 ABOUT = ("Eleven free Claude skills that clone any app: reverse-engineer it, rebuild it, "
          "test it for bugs, then fix what its users hate. Free, MIT.")
+RULES = ("Standard library only", "`%`-formatting, not f-strings", "No em dashes",
+         "python3 -m unittest discover -s tests -v", "from _load import load")
 
 
 def frontmatter(path):
@@ -57,10 +59,18 @@ class Repo(unittest.TestCase):
             "/plugin marketplace add Jakeschincariol/replica-skill",
             "/plugin install replica-skill@replica-skill",
             "## Fine print",
+            "Contributions welcome. The house rules are in",
+            "[CONTRIBUTING.md](CONTRIBUTING.md).",
         ):
             self.assertIn(line, readme)
         for s in SKILLS:
             self.assertIn("`/%s`" % s, readme)
+
+    def test_contributing_states_the_house_rules(self):
+        with open(os.path.join(ROOT, "CONTRIBUTING.md"), encoding="utf-8") as fh:
+            text = fh.read()
+        for rule in RULES:
+            self.assertIn(rule, text)
 
     def test_no_em_dashes_anywhere(self):
         bad = []
